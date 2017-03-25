@@ -1,0 +1,12 @@
+{
+    "name": "oropezac/tienda",
+    "authors": [
+        {
+            "name": "oropeza",
+            "email": "yahir.oropeza@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "2.*"
+    }
+}
