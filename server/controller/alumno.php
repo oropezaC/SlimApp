@@ -1,13 +1,22 @@
 <?php
 require 'model/alumno.php';
 
-function verAlumno() {
-  alumnos();
+function getA($id) {
+	$arr = array('id' => $id);
+	$d = json_encode($arr);
+	getAlumno($d);
+}
+
+function postA($body) {
+	postAl($body);
 }
 
 
-function addAlumno() {
-  addstudents();
+function delA($id) {
+	$arr = array('id' => $id);
+	$d = json_encode($arr);
+	delAlumno($d);
 }
+
 
 ?>
