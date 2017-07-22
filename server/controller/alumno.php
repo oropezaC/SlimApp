@@ -1,22 +1,34 @@
 <?php
+
 require 'model/alumno.php';
 
-function getA($id) {
+function postEstudentCtrl($body) {
+	$addstdModel = postEstudentModel($body);
+	return $addstdModel;
+}
+
+function getEstudentsCtrl(){
+	$stdsModel=getEstudentsModel();
+	return $stdsModel;
+}
+
+function updateEstudentCtrl($body) {
+	$putstdModel = putEstudentModel($body);
+	return $putstdModel;
+}
+
+function removeEstudentCtrl($id) {
 	$arr = array('id' => $id);
 	$d = json_encode($arr);
-	getAlumno($d);
+	$removestdModel = removeEstudentModel($d);
+	return $removestdModel;
 }
 
-function postA($body) {
-	postAl($body);
-}
-
-
-function delA($id) {
+function getEstudentCtrl($id) {
 	$arr = array('id' => $id);
 	$d = json_encode($arr);
-	delAlumno($d);
+	$stdModel=getEstudentModel($d);
+	return $stdModel;
 }
-
 
 ?>

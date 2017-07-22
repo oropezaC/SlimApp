@@ -1,46 +1,38 @@
 <?php
 
-$app->get('/hello',function($request,$response){
-	require 'model/main.php';
-	$query ="select * from estudiante;";
-	try {
-		$con = Connection();
-		$st = $con->query($query);
 
+require 'controller/alumno.php';
 
-		$result = $st->fetchAll(PDO::FETCH_OBJ);
-		$con = null;
-		echo  json_encode($result);
-		$dato =json_encode($result);
-	} catch(PDOException $err) {
-		echo '{"error":{"ERROR":'. $err->getMessage() .'}}';
-	}
+$app->post('/postEstudent',function($request,$response){
+	$body = $request->getBody();
+	$addestudentCtrl = postEstudentCtrl($body);
+	return $addestudentCtrl;
+});
+
+$app->get('/getEstudents',function(){
+	$studentsCtrl = getEstudentsCtrl();
+	return $studentsCtrl;
+});
+
+$app->put('/updateEstudent',function($request,$response){
+	$body = $request->getBody();
+	$putestudentCtrl = updateEstudentCtrl($body);
+	return $putestudentCtrl;
+});
+
+$app->delete('/removeEstudent/{id}',function($request,$response){
+	$id = $request->getAttribute('id');
+	$delestudentCtrl = removeEstudentCtrl($id);
+	return $delestudentCtrl;
+});
+
+$app->get('/getEstudent/{id}',function($request,$response){
+	$id = $request->getAttribute('id');
+	$studentCtrl = getEstudentCtrl($id);
+	return $studentCtrl;
 });
 
 
-$app->get('/hello/{id}',function($request,$response){
-	require 'controller/alumno.php';		
-	$id=$request->getAttribute('id');
-	getA($id);
-});
-
-$app->post('/addestudiante',function($request,$response){
- 	require 'controller/alumno.php';
- 	$body = $request->getBody();
- 	postA($body);
- });
-
-
-$app->delete('/delestudiante/{id}',function($request,$response,$params){
-	require 'controller/alumno.php';
-	$id=$request->getAttribute('id');
-	delA($id);
-	// $id=$params['control'];
-	// print_r($id);
-	// $query ="delete from estudiante where num_ctrl= $id;";
-	// $result = $mysqli->query($query);
-	return ($response);
-});
 
 
 ?>
